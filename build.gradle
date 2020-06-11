@@ -1,18 +1,18 @@
-plugins {
-    id 'java'
-}
+project.task("Task1")
+task("Task2")
+task "Task3"
+task Task4
 
-version '1.0-SNAPSHOT'
+Task4.description = "Task4 description"
 
-sourceCompatibility = 1.8
+Task4.doLast {println "This is Task 4"}
 
-repositories {
-    mavenCentral()
-}
+Task3 {"This is task 3"}
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
-
-task hello {
+task Task5 {println "This is task 5"}
+task Task6 {
+    description "This is task 6"
+    doLast {
+        println "This is task 6"
+    }
 }
