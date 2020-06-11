@@ -11,3 +11,12 @@ taskA.dependsOn taskB
 taskA.dependsOn taskC, taskD
 taskC.dependsOn taskE
 taskD.dependsOn taskE
+
+taskA.dependsOn taskE
+
+task taskG {
+    dependsOn taskE
+    doLast {
+        println "task G"
+    }
+}
