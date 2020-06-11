@@ -1,5 +1,6 @@
+//-*- mode: groovy -*-mode: groovy
 task hello {
-doLast {
-println "Hello, Gradle"
-}
+    doLast {
+        println "Hello, Gradle"
+    }
 }
