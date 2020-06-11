@@ -1,3 +1,4 @@
+def projectVersion = "2.0"
 project.task("Task1")
 task("Task2")
 task "Task3"
@@ -16,9 +17,13 @@ task Task6 {
         println "Task 6 - First"
     }
     doLast {
-        println "This is task 6"
+        println "This is task 6 - version $projectVersion"
     }
 }
 Task6.doFirst {
     println "Another first"
 }
+
+Task6.dependsOn(Task5)
+Task6.dependsOn(Task3)
+Task5.dependsOn(Task4)
