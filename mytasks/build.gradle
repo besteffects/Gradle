@@ -1,3 +1,7 @@
+def projectVersion = "2.0"
+//to be available among all projects
+//project.ext.projectVersion = "3.0"
+
 project.task("Task1")
 task("Task2")
 task "Task3"
@@ -12,7 +16,17 @@ Task3 {"This is task 3"}
 task Task5 {println "This is task 5"}
 task Task6 {
     description "This is task 6"
+    doFirst{
+        println "Task 6 - First"
+    }
     doLast {
-        println "This is task 6"
+        println "This is task 6 - version $projectVersion"
     }
 }
+Task6.doFirst {
+    println "Another first"
+}
+
+Task6.dependsOn(Task5)
+Task6.dependsOn(Task3)
+Task5.dependsOn(Task4)
