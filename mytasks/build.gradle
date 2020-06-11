@@ -1,0 +1,2 @@
+project.task("Task1")
+task("Task2")
