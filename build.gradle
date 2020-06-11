@@ -12,7 +12,13 @@ Task3 {"This is task 3"}
 task Task5 {println "This is task 5"}
 task Task6 {
     description "This is task 6"
+    doFirst{
+        println "Task 6 - First"
+    }
     doLast {
         println "This is task 6"
     }
+}
+Task6.doFirst {
+    println "Another first"
 }
