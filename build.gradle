@@ -20,3 +20,13 @@ task taskG {
         println "task G"
     }
 }
+
+taskA.dependsOn taskG
+
+taskB.mustRunAfter taskC, taskD
+taskB.shouldRunAfter taskD
+
+task task1 doFirst {println "task 1"}
+task task2 doFirst {println "task 2"}
+
+task2.mustRunAfter task1
