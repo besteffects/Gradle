@@ -1,0 +1,35 @@
+// << was replaced with doFirst
+task taskA doFirst {println "task A"}
+task taskB doFirst {println "task B"}
+task taskC doFirst {println "task C"}
+task taskD doFirst {println "task D"}
+task taskE doFirst {println "task E"}
+task taskF doFirst {println "task F"}
+
+taskA.doFirst {println "This is task A"}
+taskA.dependsOn taskB
+taskA.dependsOn taskC, taskD
+taskC.dependsOn taskE
+taskD.dependsOn taskE
+
+taskA.dependsOn taskE
+
+task taskG {
+    dependsOn taskE
+    doLast {
+        println "task G"
+    }
+}
+
+taskA.dependsOn taskG
+
+taskB.mustRunAfter taskC, taskD
+taskB.shouldRunAfter taskD
+
+//F runs always after E
+taskE.finalizedBy taskF
+
+task task1 doFirst {println "task 1"}
+task task2 doFirst {println "task 2"}
+
+task2.mustRunAfter task1

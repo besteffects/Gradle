@@ -1,35 +1,32 @@
-// << was replaced with doFirst
-task taskA doFirst {println "task A"}
-task taskB doFirst {println "task B"}
-task taskC doFirst {println "task C"}
-task taskD doFirst {println "task D"}
-task taskE doFirst {println "task E"}
-task taskF doFirst {println "task F"}
+def contentSpec = copySpec {
+    //exclude 'IMG_0052.JPG', 'IMG_0054.JPG'
 
-taskA.doFirst {println "This is task A"}
-taskA.dependsOn taskB
-taskA.dependsOn taskC, taskD
-taskC.dependsOn taskE
-taskD.dependsOn taskE
+    exclude {it.file.name.startsWith('IMG')}
 
-taskA.dependsOn taskE
-
-task taskG {
-    dependsOn taskE
-    doLast {
-        println "task G"
-    }
+    from 'src'
 }
 
-taskA.dependsOn taskG
+task copyImages2 (type: Copy) {
+    with contentSpec
+    into 'dest'
+}
 
-taskB.mustRunAfter taskC, taskD
-taskB.shouldRunAfter taskD
+task copyImages (type: Copy){
+    exclude 'IMG_0052.JPG', 'IMG_0054.JPG'
+    from 'src'
+    into 'dest'
+}
 
-//F runs always after E
-taskE.finalizedBy taskF
+task copyConfig (type: Copy) {
+    include 'web.xml'
+    from 'src'
+    into 'config'
+    expand (
+            [resourceRefName: 'jdbc/JacketDB']
+    )
+}
 
-task task1 doFirst {println "task 1"}
-task task2 doFirst {println "task 2"}
 
-task2.mustRunAfter task1
+
+
+
