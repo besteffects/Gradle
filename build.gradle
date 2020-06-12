@@ -26,6 +26,9 @@ taskA.dependsOn taskG
 taskB.mustRunAfter taskC, taskD
 taskB.shouldRunAfter taskD
 
+//F runs always after E
+taskE.finalizedBy taskF
+
 task task1 doFirst {println "task 1"}
 task task2 doFirst {println "task 2"}
 
