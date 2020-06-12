@@ -3,7 +3,7 @@ def contentSpec = copySpec {
 
     exclude {it.file.name.startsWith('IMG')}
 
-    from 'src'
+    from 'copyFrom'
 }
 
 task copyImages2 (type: Copy) {
@@ -12,15 +12,15 @@ task copyImages2 (type: Copy) {
 }
 
 task copyImages (type: Copy){
-    exclude 'IMG_0052.JPG', 'IMG_0054.JPG'
-    from 'src'
+    exclude 'IMG_0052.JPG', 'IMG_0054.JPG', main, test
+    from 'copyFrom'
     into 'dest'
 }
 
 task copyConfig (type: Copy) {
     include 'web.xml'
-    from 'src'
-    into 'config'
+    from 'copyFrom'
+    into 'configTo'
     expand (
             [resourceRefName: 'jdbc/JacketDB']
     )
